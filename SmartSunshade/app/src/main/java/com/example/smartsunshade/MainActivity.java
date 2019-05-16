@@ -10,11 +10,12 @@ import android.os.Bundle;
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.example.smartsunshade.fragment.HomeFragment;
+import com.example.smartsunshade.fragment.MessageFragment;
 import com.example.smartsunshade.fragment.UserFragment;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements BottomNavigationBar.OnTabSelectedListener, HomeFragment.OnFragmentInteractionListener, UserFragment.OnFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity implements BottomNavigationBar.OnTabSelectedListener, HomeFragment.OnFragmentInteractionListener {
 
     private ArrayList<Fragment> fragments;
 
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
                 .setBackgroundStyle(BottomNavigationBar.BACKGROUND_STYLE_STATIC
                 );
         bottomNavigationBar.addItem(new BottomNavigationItem(R.mipmap.ic_home_white_24dp, "Home").setActiveColorResource(R.color.orange))
+                .addItem(new BottomNavigationItem(R.mipmap.ic_message_white_24dp, "Message").setActiveColorResource(R.color.green))
                 .addItem(new BottomNavigationItem(R.mipmap.ic_user_white_24dp, "User").setActiveColorResource(R.color.blue))
                 .setFirstSelectedPosition(0)
                 .initialise();
@@ -41,14 +43,15 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
     private void setDefaultFragment() {
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();
-        transaction.replace(R.id.layFrame, HomeFragment.newInstance("Home",""));
+        transaction.replace(R.id.layFrame, HomeFragment.newInstance("Home", ""));
         transaction.commit();
     }
 
     private ArrayList<Fragment> getFragments() {
         ArrayList<Fragment> fragments = new ArrayList<>();
-        fragments.add(HomeFragment.newInstance("Home",""));
-        fragments.add(UserFragment.newInstance("User",""));
+        fragments.add(HomeFragment.newInstance("Home", ""));
+        fragments.add(MessageFragment.newInstance("Message", ""));
+        fragments.add(UserFragment.newInstance("User", ""));
         return fragments;
     }
 
@@ -59,11 +62,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
                 FragmentManager fm = getSupportFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
                 Fragment fragment = fragments.get(position);
-                if (fragment.isAdded()) {
-                    ft.replace(R.id.layFrame, fragment);
-                } else {
-                    ft.add(R.id.layFrame, fragment);
-                }
+                ft.replace(R.id.layFrame, fragment);
                 ft.commitAllowingStateLoss();
             }
         }

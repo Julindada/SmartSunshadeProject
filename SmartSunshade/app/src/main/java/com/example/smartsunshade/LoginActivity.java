@@ -26,8 +26,8 @@ public class LoginActivity extends AppCompatActivity {
     private SharedPreferences.Editor editor;
     private CheckBox rememberPass;
     //用户名
-    private final static String u = "123456";
-    private final static String p = "123456";
+    private final static String u = "admin";
+    private final static String p = "admin";
 
     private final static String remember_password = "remember_password";
     private final static String accountStr = "account";
